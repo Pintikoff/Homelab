@@ -1,0 +1,27 @@
+services:
+  pihole:
+    container_name: pihole
+    image: pihole/pihole:latest
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+      - "8080:80/tcp"
+    environment:
+      TZ: "Europe/Berlin"
+      FTLCONF_webserver_api_password: "[password]"
+      FTLCONF_dns_listeningMode: "ALL"
+      FTLCONF_dns_dnssec: "true"
+    volumes:
+      - "./etc-pihole:/etc/pihole"
+    networks:
+      pihole_net:
+        ipv6_address: fd00:dead:c0de::2
+    restart: unless-stopped
+
+networks:
+  pihole_net:
+    enable_ipv6: true
+    ipam:
+      config:
+        - subnet: 172.21.0.0/24
+        - subnet: fd00:dead:c0de::/64
