@@ -23,3 +23,4 @@ services:
       LISTEN: "/beszel_socket/beszel.sock"
       KEY: "[add KEY from web interface]"
       TOKEN: "[add tokem from web interface]"
+## In case of multiple servers change "LISTEN" to the ip
